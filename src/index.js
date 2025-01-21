@@ -1,13 +1,14 @@
 // src/index.js
+const connectDB = require('./db');
 const app = require('./app');
-const connectDB = require('./db'); // <-- el archivo que creamos
 
-const port = process.env.PORT || 5000;
-
-// 1. Primero conectar a Mongo
+// Conectamos la DB antes de exportar
 connectDB().then(() => {
-  // 2. Luego arrancar el server
-  app.listen(port, () => {
-    console.log(`Listening: http://localhost:${port}`);
-  });
+  console.log('Conectado a MongoDB Atlas');
+}).catch((err) => {
+  console.error('Error conectando a MongoDB', err);
 });
+
+// ¡No uses app.listen en un serverless!
+// Solo exporta el app:
+module.exports = app;
