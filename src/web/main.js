@@ -1,8 +1,10 @@
+// src/web/main.js (frontend)
+
 $(document).ready(function () {
 
   $("#botonMostrarAlumnos").click(function () {
     $.ajax({
-      url: "/alumnos",
+      url: "/api/alumnos",
       method: "GET",
       success: function (alumnos) {
         $("#listaAlumnos").empty();
@@ -35,7 +37,7 @@ $(document).ready(function () {
       telefono: $("#telefonoAlumno").val(),
     };
     $.ajax({
-      url: "/agregarAlumno",
+      url: "/api/agregarAlumno",
       method: "POST",
       contentType: "application/json",
       data: JSON.stringify(alumnoData),
@@ -58,7 +60,7 @@ $(document).ready(function () {
       return;
     }
     $.ajax({
-      url: "/alumnos/" + alumnoId,
+      url: "/api/alumnos/" + alumnoId,
       method: "GET",
       success: function (alumno) {
         $("#resultado").html(
@@ -74,7 +76,7 @@ $(document).ready(function () {
         );
       },
       error: function (response) {
-        $("#resultadoBuscado").text("Alumno no encontrado");
+        $("#resultado").text("Alumno no encontrado");
       },
     });
   });

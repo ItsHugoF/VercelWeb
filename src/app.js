@@ -1,4 +1,5 @@
 // src/app.js
+
 const express = require("express");
 const morgan = require("morgan");
 const helmet = require("helmet");
@@ -32,18 +33,10 @@ app.use(express.json());
 // Servir archivos estáticos desde src/web
 app.use(express.static(path.join(__dirname, "web")));
 
-app.get("/", (req, res) => {
-  // Esta ruta devolverá el index.html automáticamente por el static si existe
-  // Si quieres devolver un JSON, puedes hacerlo, pero el index.html está en la carpeta web.
-  // Para asegurar que index.html se sirva desde el static, puedes comentarlo o quitarlo.
-  // Por ahora, lo dejamos para mostrar el mensaje JSON.
-  res.json({ mensaje: "🦄 🌈✨👋🌎🌍🌏✨🌈🦄" });
-});
-
-// Rutas principales
-app.use("/alumnos", listarUsuarios);
-app.use("/alumnos", listarUsuarioId);
-app.use("/agregarAlumno", crearUsuario);
+// Rutas principales con prefijo /api
+app.use("/api/alumnos", listarUsuarios);
+app.use("/api/alumnos", listarUsuarioId);
+app.use("/api/agregarAlumno", crearUsuario);
 
 // Middlewares de error
 app.use(middlewares.notFound);
