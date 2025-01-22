@@ -38,6 +38,10 @@ app.use("/api/alumnos", listarUsuarios);
 app.use("/api/alumnos", listarUsuarioId);
 app.use("/api/agregarAlumno", crearUsuario);
 
+app.get('/', (req, res) => {
+  res.send('¡Bienvenido al backend de VercelWeb!');
+});
+
 // Middlewares de error
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
